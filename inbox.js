@@ -6,7 +6,7 @@ if (!token) {
 }
 
 function loadInbox() {
-  fetch('http://localhost:5000/api/messages/conversations', {
+  fetch('https://e-swapper-backend.onrender.com/api/messages/conversations', {
     headers: { 'Authorization': 'Bearer ' + token }
   })
   .then(res => res.json())
@@ -37,7 +37,7 @@ function loadInbox() {
 }
 
 function markAllAsRead() {
-  fetch('http://localhost:5000/api/messages/markAllRead', {
+  fetch('https://e-swapper-backend.onrender.com/api/messages/markAllRead', {
     method: 'POST',
     headers: { 'Authorization': 'Bearer ' + token }
   })
