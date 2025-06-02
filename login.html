@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - e-swapper</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f4f6;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #10b981;
+      padding: 20px;
+      text-align: center;
+      color: white;
+    }
+    nav a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+    main {
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+    }
+    form {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 100%;
+    }
+    label {
+      display: block;
+      margin-top: 20px;
+    }
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    button {
+      margin-top: 25px;
+      padding: 10px;
+      width: 100%;
+      background-color: #10b981;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #059669;
+    }
+    .link {
+      text-align: center;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>e-swapper Login</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="signup.html">Create Account</a>
+    </nav>
+  </header>
+
+  <main>
+    <form id="login-form">
+      <label for="email">Email</label>
+      <input type="email" id="email" required />
+
+      <label for="password">Password</label>
+      <input type="password" id="password" required />
+
+      <button type="submit">Log In</button>
+      <div class="link">
+        <a href="signup.html">Don't have an account? Sign up</a>
+      </div>
+    </form>
+  </main>
+
+  <script>
+    document.getElementById('login-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const credentials = {
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value
+      };
+
+      fetch('https://e-swapper-backend.onrender.com/api/users/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(credentials)
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.token) {
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('userId', data.user._id);
+          window.location.href = 'browse.html';
+        } else {
+          alert(data.message || 'Login failed');
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        alert('Login error');
+      });
+    });
+  </script>
+</body>
+</html>
