@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Inbox | e-swapper</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f4f6;
+      padding: 20px;
+    }
+    h2 {
+      text-align: center;
+    }
+    #markAllReadBtn {
+      display: block;
+      margin: 10px auto 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #10b981;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .conversation {
+      background: #fff;
+      margin: 10px auto;
+      max-width: 600px;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .conversation a {
+      text-decoration: none;
+      color: #2563eb;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h2>Your Conversations</h2>
+  <button id="markAllReadBtn" onclick="markAllAsRead()">Mark All as Read</button>
+  <div id="inboxContainer">Loading...</div>
+  <script src="inbox.js"></script>
+</body>
+</html>
