@@ -1,5 +1,5 @@
 
-const socket = io('http://localhost:5000');
+const socket = io('https://e-swapper-backend.onrender.com');
 
 const messageInput = document.getElementById('messageInput');
 const sendButton = document.getElementById('sendButton');
@@ -11,7 +11,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const otherUser = urlParams.get('user');
 let currentUser = "";
 
-fetch('http://localhost:5000/api/users/me', {
+fetch('https://e-swapper-backend.onrender.com/api/users/me', {
   headers: { 'Authorization': 'Bearer ' + token }
 })
 .then(res => res.json())
@@ -38,7 +38,7 @@ fetch('http://localhost:5000/api/users/me', {
     const formData = new FormData();
     formData.append('image', file);
 
-    const res = await fetch('http://localhost:5000/api/messages/upload', {
+    const res = await fetch('https://e-swapper-backend.onrender.com/api/messages/upload', {
       method: 'POST',
       headers: { 'Authorization': 'Bearer ' + token },
       body: formData
