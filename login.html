@@ -64,8 +64,11 @@
 <script>
   document.getElementById("loginForm").addEventListener("submit", async function(event) {
     event.preventDefault();
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
+    <form id="loginForm">
+  <input type="text" id="username" placeholder="Username" required />
+  <input type="password" id="password" placeholder="Password" required />
+  <button type="submit">Login</button>
+</form>
 
     try {
       const response = await fetch("https://e-swapper-backend.onrender.com/api/users/login", {
