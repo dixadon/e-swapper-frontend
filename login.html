@@ -119,6 +119,12 @@
         console.error(err);
         alert('Login error');
       });
+
+if (response.ok) {
+  // After login success
+  window.location.href = "setup.html"; // redirect to setup
+}
+
     });
   </script>
 </body>
