@@ -1,130 +1,99 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Login - e-swapper</title>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - e-swapper</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f3f4f6;
+      background: #f2f2f2;
       margin: 0;
       padding: 0;
     }
-    header {
-      background-color: #10b981;
-      padding: 20px;
-      text-align: center;
-      color: white;
-    }
-    nav a {
-      color: white;
-      margin: 0 10px;
-      text-decoration: none;
-    }
-    main {
-      padding: 40px 20px;
-      display: flex;
-      justify-content: center;
-    }
-    form {
-      background: white;
-      padding: 30px;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    .container {
       max-width: 400px;
-      width: 100%;
+      margin: 5rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
     }
     label {
       display: block;
-      margin-top: 20px;
+      margin-top: 1rem;
     }
-    input[type="email"],
-    input[type="password"] {
+    input {
       width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border-radius: 4px;
+      padding: 0.75rem;
+      margin-top: 0.25rem;
       border: 1px solid #ccc;
+      border-radius: 5px;
     }
     button {
-      margin-top: 25px;
-      padding: 10px;
+      margin-top: 2rem;
       width: 100%;
-      background-color: #10b981;
+      padding: 1rem;
+      background: #222;
       color: white;
       border: none;
       border-radius: 5px;
-      font-weight: bold;
+      font-size: 1rem;
       cursor: pointer;
-    }
-    button:hover {
-      background-color: #059669;
-    }
-    .link {
-      text-align: center;
-      margin-top: 15px;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>e-swapper Login</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="signup.html">Create Account</a>
-    </nav>
-  </header>
-
-  <main>
-    <form id="login-form">
-      <label for="email">Email</label>
-      <input type="email" id="email" required />
+  <div class="container">
+    <h2>Login</h2>
+    <form id="loginForm">
+      <label for="username">Username</label>
+      <input type="text" id="username" required />
 
       <label for="password">Password</label>
       <input type="password" id="password" required />
 
-      <button type="submit">Log In</button>
-      <div class="link">
-        <a href="signup.html">Don't have an account? Sign up</a>
-      </div>
+      <button type="submit">Login</button>
     </form>
-  </main>
+  </div>
 
   <script>
-    document.getElementById('login-form').addEventListener('submit', function (e) {
-      e.preventDefault();
+    document.getElementById("loginForm").addEventListener("submit", async function(event) {
+      event.preventDefault();
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
 
-      const credentials = {
-        email: document.getElementById('email').value,
-        password: document.getElementById('password').value
-      };
-
-      fetch('https://e-swapper-backend.onrender.com/api/users/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(credentials)
-      })
-      .then(res => res.json())
-      .then(data => {
-        if (data.token) {
-          localStorage.setItem('token', data.token);
-          localStorage.setItem('userId', data.user._id);
-          window.location.href = 'browse.html';
-        } else {
-          alert(data.message || 'Login failed');
-        }
-      })
-      .catch(err => {
-        console.error(err);
-        alert('Login error');
+      const response = await fetch("https://e-swapper-backend.onrender.com/api/users/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password })
       });
 
-if (response.ok) {
-  // After login success
-  window.location.href = "setup.html"; // redirect to setup
-}
+      const data = await response.json();
 
+      if (response.ok) {
+        localStorage.setItem("token", data.token);
+
+        // Fetch user profile to determine redirection
+        const profileRes = await fetch("https://e-swapper-backend.onrender.com/api/users/me", {
+          headers: {
+            "Authorization": "Bearer " + data.token
+          }
+        });
+
+        const profile = await profileRes.json();
+        if (!profile.fullname || !profile.bio || !profile.location) {
+          window.location.href = "setup.html";
+        } else {
+          window.location.href = "dashboard.html";
+        }
+      } else {
+        alert("Invalid login.");
+      }
     });
   </script>
 </body>
