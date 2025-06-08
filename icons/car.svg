@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="106.84544mm"
+   height="53.121399mm"
+   viewBox="0 0 106.84543 53.121399"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   sodipodi:docname="car.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.36792228"
+     inkscape:cx="1208.1356"
+     inkscape:cy="554.46493"
+     inkscape:window-width="1920"
+     inkscape:window-height="1028"
+     inkscape:window-x="-7"
+     inkscape:window-y="-7"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-58.829085,-103.42129)">
+    <path
+       style="fill:#f9f9f9;stroke:#000000;stroke-width:0.264583"
+       d="m 58.968525,136.99394 20.135592,-32.72034 73.710653,-0.71913 12.58475,32.72034 c 0,0 -10.0678,-6.83172 -16.89952,-0.35956 -6.83172,6.47215 -6.83172,7.91041 -6.83172,7.91041 L 89.531477,143.4661 c 0,0 -0.704801,-5.76922 -9.693905,-6.84792 -8.989104,-1.07869 -7.87139,-0.68232 -10.81932,-0.12713 -6.380576,1.20168 -8.971037,6.25592 -8.971037,6.25592 z"
+       id="path1"
+       sodipodi:nodetypes="ccccsccsscc" />
+    <ellipse
+       style="fill:#f9f9f9;stroke:#000000;stroke-width:0.264583"
+       id="path2"
+       cx="153.89346"
+       cy="147.24152"
+       rx="8.6295404"
+       ry="8.8093214" />
+    <ellipse
+       style="fill:#f9f9f9;stroke:#000000;stroke-width:0.264583"
+       id="path3"
+       cx="73.351089"
+       cy="146.79205"
+       rx="9.7082319"
+       ry="9.6183414" />
+  </g>
+</svg>

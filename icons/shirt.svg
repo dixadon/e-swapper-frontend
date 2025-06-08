@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="131.33546mm"
+   height="173.992mm"
+   viewBox="0 0 131.33546 173.992"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   sodipodi:docname="shirt.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.0406414"
+     inkscape:cx="370.44463"
+     inkscape:cy="349.78429"
+     inkscape:window-width="1920"
+     inkscape:window-height="1028"
+     inkscape:window-x="-7"
+     inkscape:window-y="-7"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-29.596524,-75.735548)">
+    <path
+       style="fill:#f9f9f9;stroke:#000000;stroke-width:0.264583"
+       d="m 52.855931,249.53753 -1.79782,-144.5448 -21.214286,-8.26997 23.012106,-20.854723 92.767549,0.359566 15.1017,14.382565 -11.50605,8.269975 6.47215,145.983047 -99.958836,3.59564 z"
+       id="path1" />
+  </g>
+</svg>

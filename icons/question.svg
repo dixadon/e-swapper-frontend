@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="39.648975mm"
+   height="103.14699mm"
+   viewBox="0 0 39.648975 103.14699"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   sodipodi:docname="question.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.73584456"
+     inkscape:cx="-56.397781"
+     inkscape:cy="300.33517"
+     inkscape:window-width="1920"
+     inkscape:window-height="1028"
+     inkscape:window-x="-7"
+     inkscape:window-y="-7"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-78.360879,-54.654186)">
+    <path
+       style="fill:#f9f9f9;stroke:#000000;stroke-width:0.264583"
+       d="m 79.643892,60.384435 c 0,0 6.229133,-3.877315 8.962321,-4.70363 2.733191,-0.826312 5.911319,-1.017 10.3607,-0.826312 4.449377,0.190688 5.529947,0.381376 7.373257,1.017 1.84331,0.635627 8.70807,8.644509 9.3437,11.123448 0.63562,2.478942 0.88987,63.181189 0.88987,63.181189 l 1.27125,5.97488 -23.200331,-0.95344 0.127124,-1.71618 c 0,0 0.254251,-13.28458 1.271251,-15.19146 1.017001,-1.90687 1.716188,-9.21657 4.640066,-16.08133 2.92388,-6.864753 4.76719,-11.949759 4.76719,-11.949759 0,0 1.5255,-2.034003 -0.5085,-4.258691 -2.034,-2.224691 -3.75019,-7.627509 -6.801192,-7.818197 -3.051003,-0.190688 -11.504824,-1.398376 -14.238015,-0.826312 -2.733188,0.572063 -3.750191,0 -3.750191,0 0,0 -1.779751,-7.18257 -1.652624,-10.106448 0.127124,-2.923879 1.144124,-6.864758 1.144124,-6.864758 z"
+       id="path3" />
+    <ellipse
+       style="fill:#f9f9f9;stroke:#000000;stroke-width:0.264583"
+       id="path4"
+       cx="105.75681"
+       cy="147.69098"
+       rx="10.921762"
+       ry="9.9779053" />
+  </g>
+</svg>
