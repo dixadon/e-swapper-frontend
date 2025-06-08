@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>e-swapper - Home</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #222;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      color: #fff;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 16px;
+    }
+    .hero {
+      background-color: #fff;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+    .hero p {
+      font-size: 18px;
+      margin-bottom: 30px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero a.button {
+      background-color: #222;
+      color: #fff;
+      padding: 14px 30px;
+      font-size: 16px;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    .categories {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 50px;
+    }
+    .category {
+      width: 120px;
+      margin: 10px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .category img {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 10px;
+    }
+    .category span {
+      display: block;
+      font-size: 14px;
+    }
+    footer {
+      margin-top: 60px;
+      text-align: center;
+      padding: 20px;
+      background-color: #222;
+      color: #fff;
+      font-size: 14px;
+    }
+    footer a {
+      color: #fff;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">e-swapper</div>
+    <nav>
+      <a href="browse.html">Browse</a>
+      <a href="list.html">List</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="login.html">Login</a>
+      <a href="signup.html">Sign Up</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Swap What You Don’t Need. Get What You Want.</h1>
+    <p>
+      Barter anything — from a needle to a rocket. Trade with people near and far.
+      No item is too small, too big, or too unusual. What’s junk to one might be a gem to another.
+      Just swap it. No money needed.
+    </p>
+    <a href="list.html" class="button">Start Swapping</a>
+
+    <div class="categories">
+      <div class="category"><a href="/categories/shoes.html"><img src="icons/shoe.svg"> <span>Shoes</span></a></div>
+      <div class="category"><a href="/categories/automobile.html"><img src="icons/car.svg"/> <span>Automobile</span></a></div>
+      <div class="category"><a href="/categories/furniture.html"><img src="icons/chair.svg"/><span>Furniture</span></a></div>
+      <div class="category"><a href="/categories/games_and_toys.html"><img src="icons/game.svg"/><span>Games and Toys</span></a></div>
+      <div class="category"><a href="/categories/books.html"><img src="icons/book.svg"/><span>Books</span></a></div>
+      <div class="category"><a href="/categories/phones.html"><img src="icons/phone.svg"/><span>Phones</span></div></a>
+      <div class="category"><a href="/categories/other.html"><img src="icons/question.svg"/><span>Other</span></a></div>
+
+    </div>
+  </section>
+<nav id="navbar">
+  <a href="index.html">Home</a>
+  <a href="browse.html">Browse</a>
+  <a href="list.html">List Item</a>
+  <a href="messages.html">Messages</a>
+  <a href="login.html" id="loginLink">Login</a>
+<a href="logout.html" id="logoutLink" style="display: none;">Logout</a>
+</nav>
+
+<script>
+  const token = localStorage.getItem("token");
+
+  if (token) {
+    // User is logged in
+    document.getElementById("logoutLink").style.display = "inline-block";
+    document.getElementById("loginLink").style.display = "none";
+  } else {
+    // Not logged in
+    document.getElementById("logoutLink").style.display = "none";
+    document.getElementById("loginLink").style.display = "inline-block";
+  }
+</script>
+
+
+
+  <footer>
+    © 2025 e-swapper |
+    <a href="#">Terms</a> |
+    <a href="#">Privacy</a> |
+    <a href="#">Disclaimer</a>
+  </footer>
+
+</body>
+</html>

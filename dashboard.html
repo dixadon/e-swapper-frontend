@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>e-swapper | Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+  <header class="toolbar">
+    <div class="logo">e-swapper</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="browse.html">Browse</a>
+      <a href="list.html">List Item</a>
+      <a href="messages.html">Messages</a>
+        <a href="login.html" id="loginLink">Login</a>
+<a href="logout.html" id="logoutLink" style="display: none;">Logout</a>
+</nav>
+
+<script>
+  const token = localStorage.getItem("token");
+
+  if (token) {
+    // User is logged in
+    document.getElementById("logoutLink").style.display = "inline-block";
+    document.getElementById("loginLink").style.display = "none";
+  } else {
+    // Not logged in
+    document.getElementById("logoutLink").style.display = "none";
+    document.getElementById("loginLink").style.display = "inline-block";
+  }
+</script>
+
+  </header>
+  <main class="dashboard">
+    <aside class="profile">
+      <img src="profile-icon.svg" alt="Profile" />
+      <h2 id="username">@username</h2>
+      <button>Edit Profile</button>
+    </aside>
+    <section class="feed">
+      <h1>Your Trade Posts</h1>
+      <div id="posts"></div>
+      <form id="itemForm" enctype="multipart/form-data">
+        <input type="text" id="itemTitle" placeholder="Title" required /><br/>
+        <textarea id="itemDesc" placeholder="Description" rows="3" required></textarea><br/>
+        
+<select id="itemCategory" required>
+  <option value="">Select Category</option>
+  <option value="Shoes">Shoes</option>
+  <option value="Automobile">Automobile</option>
+  <option value="Furniture">Furniture</option>
+  <option value="Games and Toys">Games and Toys</option>
+  <option value="Books">Books</option>
+  <option value="Phones">Phones</option>
+  <option value="Other">Other</option>
+</select><br/>
+<input type="file" id="itemImage" accept="image/*" required /><br/>
+
+        <button type="submit">Post Item</button>
+      </form>
+    </section>
+    <aside class="sidebar">
+      <h3>Suggestions</h3>
+      <ul>
+        <li>@swapperJoe</li>
+        <li>@gearGranny</li>
+        <li>@urbanTinker</li>
+      </ul>
+    </aside>
+  </main>
+  <script>
+    const username = "@username";
+    const postsDiv = document.getElementById("posts");
+
+    async function loadPosts() {
+      const res = await fetch("http://localhost:5000/api/items");
+      const data = await res.json();
+      postsDiv.innerHTML = data.map(p => 
+        <div class="post">
+          <p><strong>\${p.user}:</strong> \${p.title}</p>
+          <p>\${p.description}</p>
+          <img src="http://localhost:5000/uploads/\${p.image}" width="200" />
+        </div>
+      ).join("");
+    }
+
+    document.getElementById("itemForm").onsubmit = async function(e) {
+      e.preventDefault();
+      const formData = new FormData();
+      formData.append("user", username);
+      formData.append("title", document.getElementById("itemTitle").value);
+      formData.append("description", document.getElementById("itemDesc").value);
+      formData.append("image", document.getElementById("itemImage").files[0]);
+      formData.append("category", document.getElementById("itemCategory").value);
+
+      await fetch("http://localhost:5000/api/items", {
+        method: "POST",
+        body: formData
+      });
+
+      this.reset();
+      loadPosts();
+    };
+
+    loadPosts();
+  </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Other - e-swapper</title>
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+  <header class="toolbar">
+    <div class="logo">e-swapper</div>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="../browse.html">Browse</a>
+      <a href="../list.html">List Item</a>
+      <a href="../messages.html">Messages</a>
+      <a href="../logout.html">Logout</a>
+    </nav>
+  </header>
+  <main class="dashboard">
+    <section class="feed">
+      <h1>Other Listings</h1>
+      <div id="posts"></div>
+    </section>
+  </main>
+  <script>
+    async function loadPosts() {
+      const res = await fetch("http://localhost:5000/api/items");
+      const data = await res.json();
+      const filtered = data.filter(p => p.category === "Other");
+      document.getElementById("posts").innerHTML = filtered.map(p =>
+        `<div class="post">
+          <p><strong>${p.user}:</strong> ${p.title}</p>
+          <p>${p.description}</p>
+          <img src="http://localhost:5000/uploads/${p.image}" width="200" />
+        </div>`
+      ).join("");
+    }
+    loadPosts();
+  </script>
+</body>
+</html>
