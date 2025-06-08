@@ -1,1 +1,0 @@
-fetch('https://e-swapper-backend.onrender.com/api/items').then(r => r.json()).then(data => {document.getElementById('items').innerHTML = data.map(item => `<div><h3>${item.title}</h3><p>${item.description}</p></div>`).join('');});
