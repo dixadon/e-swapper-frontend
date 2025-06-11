@@ -19,6 +19,17 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, userId })
       });
+      <button id="subscribe">Subscribe</button>
+<script>
+document.getElementById('subscribe').addEventListener('click', async () => {
+  const res = await fetch('https://your-backend.com/api/checkout/create-checkout-session', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' }
+  });
+  const data = await res.json();
+  window.location.href = data.url;
+});
+</script>
 
       const data = await res.json();
       stripe.redirectToCheckout({ sessionId: data.id });
