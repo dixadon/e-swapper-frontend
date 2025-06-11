@@ -6,24 +6,17 @@
 </head>
 <body>
   <h1>Join Premium Membership</h1>
-  <button id="joinBtn">Join for $10/month</button>
+  <button id="subscribe">Subscribe</button>
+<script>
+document.getElementById('subscribe').addEventListener('click', async () => {
+  const res = await fetch('https://your-backend.com/api/checkout/create-checkout-session', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' }
+  });
+  const data = await res.json();
+  window.location.href = data.url;
+});
+</script>
 
-  <script>
-    const stripe = Stripe('pk_live_51RYsIGP93qXLlc6iluMuKdfILCbG3MLIxZhU6C0IYIP8f0LW3pGtm3EKUf3IRi5lxsCUwg8c94Bf51s8X8U6kht9005EeCd6wu'); // Replace with your publishable key
-    const userId = localStorage.getItem('userId'); // Use your method to get user ID
-    const email = localStorage.getItem('email');
-
-    document.getElementById('joinBtn').addEventListener('click', async () => {
-      const res = await fetch('https://e-swapper-backend.onrender.com/api/payment/create-checkout-session', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, userId })
-      });
-      
-
-      const data = await res.json();
-      stripe.redirectToCheckout({ sessionId: data.id });
-    });
-  </script>
 </body>
 </html>
