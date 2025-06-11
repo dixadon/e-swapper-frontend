@@ -6,17 +6,9 @@
 </head>
 <body>
   <h1>Join Premium Membership</h1>
-  <button id="subscribe">Subscribe</button>
-<script>
-document.getElementById('subscribe').addEventListener('click', async () => {
-  const res = await fetch('https://e-swapper-backend.onrender.com/api/checkout/create-checkout-session', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' }
-  });
-  const data = await res.json();
-  window.location.href = data.url;
-});
-</script>
+  <a href="https://buy.stripe.com/8x2fZjgfTbYH4Xt3Lxawo00">
+      <button id="subscribe>Subscribe</button>
+        </a>
 
 </body>
 </html>
