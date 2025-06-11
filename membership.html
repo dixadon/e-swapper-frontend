@@ -9,7 +9,7 @@
   <button id="subscribe">Subscribe</button>
 <script>
 document.getElementById('subscribe').addEventListener('click', async () => {
-  const res = await fetch('https://your-backend.com/api/checkout/create-checkout-session', {
+  const res = await fetch('https://e-swapper-backend.onrender.com/api/checkout/create-checkout-session', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' }
   });
