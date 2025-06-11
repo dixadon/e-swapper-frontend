@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>e-Swapper Membership</title>
+  <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+  <h1>Join Premium Membership</h1>
+  <button id="joinBtn">Join for $10/month</button>
+
+  <script>
+    const stripe = Stripe('pk_test_51NEXAMPLEPUBLISHABLE'); // Replace with your publishable key
+    const userId = localStorage.getItem('userId'); // Use your method to get user ID
+    const email = localStorage.getItem('email');
+
+    document.getElementById('joinBtn').addEventListener('click', async () => {
+      const res = await fetch('https://your-backend.com/api/payment/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, userId })
+      });
+
+      const data = await res.json();
+      stripe.redirectToCheckout({ sessionId: data.id });
+    });
+  </script>
+</body>
+</html>
