@@ -14,7 +14,7 @@
     const email = localStorage.getItem('email');
 
     document.getElementById('joinBtn').addEventListener('click', async () => {
-      const res = await fetch('https://your-backend.com/api/payment/create-checkout-session', {
+      const res = await fetch('https://e-swapper-backend.onrender.com/api/payment/create-checkout-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, userId })
@@ -22,7 +22,7 @@
       <button id="subscribe">Subscribe</button>
 <script>
 document.getElementById('subscribe').addEventListener('click', async () => {
-  const res = await fetch('https://your-backend.com/api/checkout/create-checkout-session', {
+  const res = await fetch('https://e-swapper-backend.onrender.com/api/checkout/create-checkout-session', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' }
   });
