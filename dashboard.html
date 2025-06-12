@@ -11,13 +11,24 @@
   <header class="toolbar">
     <div class="logo">e-swapper</div>
     <nav>
-      <a href="index.html">Home</a>
-      <a href="browse.html">Browse</a>
-      <a href="list.html">List Item</a>
-      <a href="messages.html">Messages</a>
-        <a href="login.html" id="loginLink">Login</a>
-<a href="logout.html" id="logoutLink" style="display: none;">Logout</a>
+  <a href="index.html">Home</a>
+  <div class="dropdown">
+    <button class="dropbtn">Browse ▾</button>
+    <div class="dropdown-content">
+      <a href="./categories/all.html">All</a>
+      <a href="./categories/shoes.html">Shoes</a>
+      <a href="./categories/automobile.html">Automobile</a>
+      <a href="./categories/furniture.html">Furniture</a>
+      <a href="./categories/games_and_toys.html">Games & Toys</a>
+      <a href="./categories/books.html">Books</a>
+      <a href="./categories/phones.html">Phones</a>
+      <a href="./categories/other.html">Other</a>
+    </div>
+  </div>
+  <a href="login.html">Login</a>
+  <a href="signup.html">Sign Up</a>
 </nav>
+
 
 <script>
   const token = localStorage.getItem("token");

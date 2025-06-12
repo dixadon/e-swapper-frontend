@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>All Listings | e-swapper</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: #f9f9f9;
+    }
+
+    header {
+      background-color: #fff;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #111;
+    }
+
+    nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropbtn {
+      background: none;
+      border: none;
+      font: inherit;
+      color: #333;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #fff;
+      min-width: 160px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      z-index: 1;
+    }
+
+    .dropdown-content a {
+      color: #333;
+      padding: 12px 16px;
+      display: block;
+      text-decoration: none;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f2f2f2;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .container {
+      padding: 40px;
+    }
+
+    .listing {
+      background: white;
+      margin-bottom: 20px;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .listing h2 {
+      margin: 0 0 10px;
+    }
+
+    .listing p {
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">e-swapper</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <div class="dropdown">
+        <button class="dropbtn">Browse ▾</button>
+        <div class="dropdown-content">
+          <a href="all.html">All</a>
+          <a href="shoes.html">Shoes</a>
+          <a href="automobile.html">Automobile</a>
+          <a href="furniture.html">Furniture</a>
+          <a href="games.html">Games & Toys</a>
+          <a href="books.html">Books</a>
+          <a href="phones.html">Phones</a>
+          <a href="other.html">Other</a>
+        </div>
+      </div>
+      <a href="login.html">Login</a>
+      <a href="signup.html">Sign Up</a>
+    </nav>
+  </header>
+
+  <div class="container" id="listingContainer">
+    <!-- Listings will load here -->
+  </div>
+
+  <script>
+    fetch('https://e-swapper-backend.onrender.com/api/items')
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById('listingContainer');
+        data.forEach(item => {
+          const div = document.createElement('div');
+          div.className = 'listing';
+          div.innerHTML = `<h2>${item.title}</h2><p>${item.description}</p>`;
+          container.appendChild(div);
+        });
+      });
+  </script>
+
+</body>
+</html>
