@@ -162,6 +162,18 @@
   </header>
 
   <section class="hero">
+    <div style="padding: 20px; text-align: center;">
+  <input
+    type="text"
+    id="searchInput"
+    placeholder="Search listings..."
+    style="width: 60%; padding: 10px; font-size: 16px; border-radius: 8px; border: 1px solid #ccc;"
+  />
+</div>
+<div class="container" id="listingContainer">
+  <!-- Listings will load here -->
+</div>
+
     <h1>Swap What You Don’t Need. Get What You Want.</h1>
     <p>
       Barter anything — from a needle to a rocket. Trade with people near and far.
@@ -192,18 +204,25 @@
 </nav>
 
 <script>
-  const token = localStorage.getItem("token");
+  document.getElementById('searchInput').addEventListener('input', async function () {
+  const query = this.value.trim();
 
-  if (token) {
-    // User is logged in
-    document.getElementById("logoutLink").style.display = "inline-block";
-    document.getElementById("loginLink").style.display = "none";
-  } else {
-    // Not logged in
-    document.getElementById("logoutLink").style.display = "none";
-    document.getElementById("loginLink").style.display = "inline-block";
+  if (query === '') {
+    renderListings(allItems); // fallback to full list
+    return;
   }
+
+  try {
+    const res = await fetch(`https://e-swapper-backend.onrender.com/api/items/search?q=${encodeURIComponent(query)}`);
+    const filtered = await res.json();
+    renderListings(filtered);
+  } catch (err) {
+    console.error('Search error:', err);
+  }
+});
+
 </script>
+
 
 
 
