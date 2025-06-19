@@ -20,7 +20,7 @@ input, textarea {
   border-radius: 5px;
 }
 button {
-  background-color: #000000;
+  background-color: #0a84ff;
   color: #fff;
   padding: 10px 20px;
   border: none;
@@ -28,5 +28,5 @@ button {
   cursor: pointer;
 }
 button:hover {
-  background-color: #323232;
+  background-color: #006ae0;
 }
