@@ -92,12 +92,14 @@
     }
   </style>
 </head>
+
 <body>
 
   <header>
+    
     <div class="logo">e-swapper</div>
     <nav>
-      <a href="index.html">Home</a>
+      <a href="../index.html">Home</a>
       <div class="dropdown">
         <button class="dropbtn">Browse ▾</button>
         <div class="dropdown-content">
@@ -114,6 +116,18 @@
       <a href="login.html">Login</a>
       <a href="signup.html">Sign Up</a>
     </nav>
+  <form id="searchForm" style="display: flex;">
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Search items..."
+      style="padding: 8px 12px; border-radius: 8px 0 0 8px; border: none; outline: none; font-size: 1rem;">
+    <button
+      type="submit"
+      style="background-color: #444; color: white; border: none; padding: 8px 16px; border-radius: 0 8px 8px 0; cursor: pointer;">
+      Search
+    </button>
+  </form>
   </header>
 
   <div class="container" id="listingContainer">
@@ -133,6 +147,24 @@
         });
       });
   </script>
+
+<script>
+  const form = document.getElementById('searchForm');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const query = document.getElementById('searchInput').value;
+
+    try {
+      const response = await fetch(`https://e-swapper-backend.onrender.com/api/items/search?q=${encodeURIComponent(query)}`);
+      const results = await response.json();
+
+      // Replace or update your listings display with these results
+      console.log(results); // or display them in your page dynamically
+    } catch (err) {
+      console.error('Search error:', err);
+    }
+  });
+</script>
 
 </body>
 </html>
