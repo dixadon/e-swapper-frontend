@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Messages | e-swapper</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { margin: 0; background: #000; color: #fff; font-family: Arial, sans-serif; }
+    header { background: #000; padding: 20px; border-bottom: 1px solid #333; display: flex; justify-content: space-between; align-items: center; }
+    header h1 { margin: 0; font-size: 24px; }
+    nav a { color: #fff; text-decoration: none; margin-left: 20px; }
+    .chat-container { display: flex; height: calc(100vh - 80px); }
+    .sidebar { width: 250px; background: #111; padding: 20px; overflow-y: auto; border-right: 1px solid #333; }
+    .chat-window { flex: 1; display: flex; flex-direction: column; padding: 20px; }
+    .messages { flex: 1; overflow-y: auto; padding-bottom: 20px; border-bottom: 1px solid #333; }
+    .message { margin-bottom: 15px; }
+    .message.you { text-align: right; }
+    .message img { max-width: 200px; max-height: 200px; border-radius: 4px; }
+    .message-content { background: #222; padding: 10px; border-radius: 5px; display: inline-block; max-width: 70%; }
+    .message.you .message-content { background: #444; }
+    .input-area { display: flex; gap: 10px; margin-top: 10px; }
+    input[type="text"], input[type="file"] { flex: 1; padding: 10px; border-radius: 5px; border: none; background: #222; color: #fff; }
+    button { padding: 10px 20px; border: none; background: #fff; color: #000; border-radius: 5px; cursor: pointer; }
+    button:hover { background: #ddd; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>e-swapper</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="browse.html">Browse</a>
+      <a href="list.html">List Item</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="logout.html" id="logout-link" style="display: none;">Logout</a>
+    </nav>
+  </header>
+
+  <div class="chat-container">
+    <div class="sidebar">
+      <h2>New Chat</h2>
+      <input type="text" id="newChatUser" placeholder="Enter username..." />
+      <button onclick="startChat()">Start</button>
+    </div>
+    <div class="chat-window">
+      <div class="messages" id="chatMessages"></div>
+      <div class="input-area">
+        <input type="text" id="messageInput" placeholder="Type your message...">
+        <input type="file" id="imageInput" accept="image/*">
+        <button id="sendButton">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+  <script>
+    const socket = io('https://e-swapper-backend.onrender.com');
+    const currentUser = localStorage.getItem('username');
+    let selectedUser = null;
+    let currentRoom = null;
+
+    const messageInput = document.getElementById('messageInput');
+    const sendButton = document.getElementById('sendButton');
+    const imageInput = document.getElementById('imageInput');
+    const messagesDiv = document.getElementById('chatMessages');
+
+    if (localStorage.getItem('token')) {
+      document.getElementById('logout-link').style.display = 'inline';
+    }
+
+    function startChat() {
+      selectedUser = document.getElementById('newChatUser').value.trim();
+      if (!selectedUser) return alert('Enter a valid username.');
+      currentRoom = `chat_${currentUser}_${selectedUser}`;
+      socket.emit('joinRoom', currentRoom);
+      messagesDiv.innerHTML = '';
+    }
+
+    sendButton.addEventListener('click', async () => {
+      const text = messageInput.value;
+      const file = imageInput.files[0];
+      if (!selectedUser || !currentRoom) return;
+
+      const formData = new FormData();
+      formData.append('sender', currentUser);
+      formData.append('receiver', selectedUser);
+      formData.append('room', currentRoom);
+      if (text) formData.append('text', text);
+      if (file) formData.append('image', file);
+
+      const res = await fetch('https://e-swapper-backend.onrender.com/api/messages/send', {
+        method: 'POST',
+        body: formData
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        if (text) appendMessage('you', text);
+        if (file) appendImage('you', data.imageUrl);
+        messageInput.value = '';
+        imageInput.value = '';
+      }
+    });
+
+    socket.on('receiveMessage', (msg) => {
+      if (msg.text) appendMessage('them', msg.text);
+      if (msg.imageUrl) appendImage('them', msg.imageUrl);
+    });
+
+    function appendMessage(sender, text) {
+      const div = document.createElement('div');
+      div.className = `message ${sender}`;
+      div.innerHTML = `<div class="message-content">${text}</div>`;
+      messagesDiv.appendChild(div);
+    }
+
+    function appendImage(sender, url) {
+      const div = document.createElement('div');
+      div.className = `message ${sender}`;
+      div.innerHTML = `<div class="message-content"><img src="${url}" alt="image" /></div>`;
+      messagesDiv.appendChild(div);
+    }
+  </script>
+</body>
+</html>

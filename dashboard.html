@@ -1,315 +1,159 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>e-swapper | Dashboard</title>
-  <link rel="stylesheet" href="dashboard.css" />
-
-    <style>
+  <title>Dashboard | e-swapper</title>
+  <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f4f4f4;
-      color: #333;
+      font-family: Arial, sans-serif;
+      background-color: #000;
+      color: #fff;
     }
+
     header {
-      background-color: #222;
-      padding: 20px 40px;
+      background-color: #000;
+      padding: 20px;
+      border-bottom: 1px solid #333;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    .logo {
-      color: #fff;
+
+    header h1 {
+      margin: 0;
       font-size: 24px;
-      font-weight: bold;
+      color: #fff;
     }
+
     nav a {
       color: #fff;
       text-decoration: none;
       margin-left: 20px;
-      font-size: 16px;
+      font-size: 14px;
     }
-    .hero {
-      background-color: #fff;
-      padding: 60px 20px;
-      text-align: center;
+
+    nav a:hover {
+      text-decoration: underline;
     }
-    .hero h1 {
-      font-size: 36px;
-      margin-bottom: 20px;
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
     }
-    .hero p {
-      font-size: 18px;
-      margin-bottom: 30px;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .hero a.button {
-      background-color: #222;
-      color: #fff;
-      padding: 14px 30px;
-      font-size: 16px;
-      text-decoration: none;
-      border-radius: 5px;
-    }
-    .categories {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 50px;
-    }
-    .category {
-      width: 120px;
-      margin: 10px;
+
+    .section {
+      background-color: #111;
+      border: 1px solid #333;
+      border-radius: 8px;
       padding: 20px;
-      background-color: #fff;
-      border-radius: 10px;
-      text-align: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
     }
-    .category img {
-      width: 40px;
-      height: 40px;
+
+    .section h2 {
+      margin-top: 0;
+      font-size: 18px;
       margin-bottom: 10px;
     }
-    .category span {
-      display: block;
-      font-size: 14px;
-    }
-    footer {
-      margin-top: 60px;
-      text-align: center;
-      padding: 20px;
-      background-color: #222;
-      color: #fff;
-      font-size: 14px;
-    }
-    footer a {
-      color: #fff;
-      margin: 0 10px;
+
+    .button {
+      background-color: #fff;
+      color: #000;
+      padding: 8px 16px;
+      border: none;
       text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
     }
 
-    .dropdown {
-  position: relative;
-  display: inline-block;
-}
+    .button:hover {
+      background-color: #ddd;
+    }
 
-.dropbtn {
-  color: white !important;
-  background: none;
-  border: none;
-  font-size: 0.99rem;
-  cursor: pointer;
-  font-family: inherit;
-}
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
 
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #fff;
-  min-width: 160px;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-  z-index: 1;
-}
+    li {
+      margin-bottom: 6px;
+    }
 
-.dropdown-content a {
-  color: #333;
-  padding: 12px 16px;
-  display: block;
-  text-decoration: none;
-}
-
-.dropdown-content a:hover {
-  background-color: #f2f2f2;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
+    .small-text {
+      font-size: 12px;
+      color: #aaa;
+    }
   </style>
-
 </head>
 <body>
-  <header class="toolbar">
-    <div class="logo">e-swapper</div>
-      <nav>
-  <a href="index.html">Home</a>
-  <div class="dropdown">
-    <button class="dropbtn">Browse ▾</button>
-    <div class="dropdown-content">
-      <a href="./categories/all.html">All</a>
-      <a href="./categories/shoes.html">Shoes</a>
-      <a href="./categories/automobile.html">Automobile</a>
-      <a href="./categories/furniture.html">Furniture</a>
-      <a href="./categories/games_and_toys.html">Games & Toys</a>
-      <a href="./categories/books.html">Books</a>
-      <a href="./categories/phones.html">Phones</a>
-      <a href="./categories/other.html">Other</a>
+  <header>
+    <h1>e-swapper</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="browse.html">Browse</a>
+      <a href="list.html">List Item</a>
+      <a href="messages.html">Messages</a>
+      <a href="logout.html" id="logout-link" style="display: none;">Logout</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="section">
+      <h2>Your Listings</h2>
+      <ul id="userListings">
+        <li>Loading your items...</li>
+      </ul>
+      <a href="list.html" class="button">List New Item</a>
+    </div>
+
+    <div class="section">
+      <h2>Messages</h2>
+      <p>Check your inbox and communicate with other swappers.</p>
+      <a href="messages.html" class="button">Go to Inbox</a>
+    </div>
+
+    <div class="section">
+      <h2>Profile</h2>
+      <p>Edit your preferences and profile information.</p>
+      <a href="edit-profile.html" class="button">Edit Profile</a>
     </div>
   </div>
-  
- 
-      <a href="list.html">List</a>
-      <a href="dashboard.html">Dashboard</a>
-      <a href="login.html">Login</a>
-      <a href="https://buy.stripe.com/8x2fZjgfTbYH4Xt3Lxawo00">Join Today!</a>
-    </nav>
 
-
-
-<script>
-  const token = localStorage.getItem("token");
-
-  if (token) {
-    // User is logged in
-    document.getElementById("logoutLink").style.display = "inline-block";
-    document.getElementById("loginLink").style.display = "none";
-  } else {
-    // Not logged in
-    document.getElementById("logoutLink").style.display = "none";
-    document.getElementById("loginLink").style.display = "inline-block";
-  }
-</script>
-
-  </header>
-  <main class="dashboard">
-    <aside class="profile">
-      <img src="profile-icon.svg" alt="Profile" />
-      <h2 id="username">@username</h2>
-      <button>Edit Profile</button>
-    </aside>
-    <section class="feed">
-      <h1>Your Trade Posts</h1>
-      <div id="posts"></div>
-      <form id="itemForm" enctype="multipart/form-data">
-        <input type="text" id="itemTitle" placeholder="Title" required /><br/>
-        <textarea id="itemDesc" placeholder="Description" rows="3" required></textarea><br/>
-        
-<select id="itemCategory" required>
-  <option value="">Select Category</option>
-    <option value="All">All</option>
-  <option value="Shoes">Shoes</option>
-
-  <option value="Automobile">Automobile</option>
-  <option value="Furniture">Furniture</option>
-  <option value="Games and Toys">Games and Toys</option>
-  <option value="Books">Books</option>
-  <option value="Phones">Phones</option>
-  <option value="Other">Other</option>
-</select><br/>
-<input type="file" id="itemImage" accept="image/*" required /><br/>
-
-        <button type="submit">Post Item</button>
-      </form>
-    </section>
-    <aside class="sidebar">
-      <h3>Suggestions</h3>
-      <ul>
-        <li>@swapperJoe</li>
-        <li>@gearGranny</li>
-        <li>@urbanTinker</li>
-      </ul>
-      <div id="dynamicContainer" contenteditable="false"
-     style="
-       resize: both;
-       overflow: auto;
-       min-height: 200px;
-       min-width: 300px;
-       border: 2px dashed #ccc;
-       padding: 20px;
-       margin: 40px auto;
-       max-width: 90%;
-       background-color: #f9f9f9;
-       border-radius: 12px;
-       box-shadow: 0 0 10px rgba(0,0,0,0.05);
-     ">
-     <div id="chatContainer" style="
-  resize: both;
-  overflow: auto;
-  min-height: 300px;
-  min-width: 300px;
-  border: 2px solid #ccc;
-  padding: 20px;
-  margin: 40px auto;
-  max-width: 90%;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
-">
-  <div id="chatMessages" style="height: 200px; overflow-y: auto; margin-bottom: 15px;"></div>
-  <input id="chatInput" type="text" placeholder="Type a message..." style="width: 70%; padding: 10px;" />
-  <button id="chatSend" style="padding: 10px;">Send</button>
-</div>
-
-<script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
-<script>
-  const socket = io('https://e-swapper-backend.onrender.com'); // Replace with your deployed backend
-  const messagesDiv = document.getElementById('chatMessages');
-  const input = document.getElementById('chatInput');
-  const sendBtn = document.getElementById('chatSend');
-
-  socket.on('message', (msg) => {
-    const el = document.createElement('div');
-    el.textContent = msg;
-    messagesDiv.appendChild(el);
-    messagesDiv.scrollTop = messagesDiv.scrollHeight;
-  });
-
-  sendBtn.addEventListener('click', () => {
-    const msg = input.value.trim();
-    if (msg) {
-      socket.emit('message', msg);
-      input.value = '';
-    }
-  });
-</script>
-
-</div>
-
-    </aside>
-  </main>
-  
   <script>
-    const username = "@username";
-    const postsDiv = document.getElementById("posts");
-
-    async function loadPosts() {
-      const res = await fetch("http://localhost:5000/api/items");
-      const data = await res.json();
-      postsDiv.innerHTML = data.map(p => 
-        <div class="post">
-          <p><strong>\${p.user}:</strong> \${p.title}</p>
-          <p>\${p.description}</p>
-          <img src="http://localhost:5000/uploads/\${p.image}" width="200" />
-        </div>
-      ).join("");
+    // Check if token exists to show/hide logout
+    const token = localStorage.getItem('token');
+    if (token) {
+      document.getElementById('logout-link').style.display = 'inline';
     }
 
-    document.getElementById("itemForm").onsubmit = async function(e) {
-      e.preventDefault();
-      const formData = new FormData();
-      formData.append("user", username);
-      formData.append("title", document.getElementById("itemTitle").value);
-      formData.append("description", document.getElementById("itemDesc").value);
-      formData.append("image", document.getElementById("itemImage").files[0]);
-      formData.append("category", document.getElementById("itemCategory").value);
-
-      await fetch("http://localhost:5000/api/items", {
-        method: "POST",
-        body: formData
-      });
-
-      this.reset();
-      loadPosts();
-    };
-
-    loadPosts();
+    // Load user listings
+    fetch('https://e-swapper-backend.onrender.com/api/items/my-listings', {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    })
+    .then(res => res.json())
+    .then(data => {
+      const list = document.getElementById('userListings');
+      list.innerHTML = '';
+      if (data.length === 0) {
+        list.innerHTML = '<li class="small-text">No items listed yet.</li>';
+      } else {
+        data.forEach(item => {
+          const li = document.createElement('li');
+          li.textContent = item.title || 'Untitled item';
+          list.appendChild(li);
+        });
+      }
+    })
+    .catch(err => {
+      document.getElementById('userListings').innerHTML = '<li class="small-text">Failed to load items.</li>';
+    });
   </script>
 </body>
 </html>

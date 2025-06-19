@@ -3,27 +3,33 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Profile Settings - e-swapper</title>
+  <title>Dashboard - e-swapper</title>
   <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
-  <div class="dashboard-container">
-    <h1>Edit Profile</h1>
-    <form id="profileForm">
-      <label for="username">Username:</label>
-      <input type="text" id="username" name="username" required>
+  <div class="dashboard-wrapper">
+    <header>
+      <h2>e-swapper Dashboard</h2>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="list.html">List Item</a>
+        <a href="browse.html">Browse</a>
+        <a href="messages.html">Messages</a>
+        <a href="logout.html" id="logout">Logout</a>
+      </nav>
+    </header>
 
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required>
-
-      <label for="bio">Bio:</label>
-      <textarea id="bio" name="bio"></textarea>
-
-      <button type="submit">Save Changes</button>
-    </form>
-    <p id="status"></p>
+    <section class="profile-edit">
+      <h3>Edit Your Profile</h3>
+      <form id="profileForm">
+        <input type="text" id="username" name="username" placeholder="Username" required>
+        <input type="email" id="email" name="email" placeholder="Email" required>
+        <textarea id="bio" name="bio" placeholder="Write a short bio..."></textarea>
+        <button type="submit">Save</button>
+        <p id="status"></p>
+      </form>
+    </section>
   </div>
-
   <script src="dashboard.js"></script>
 </body>
 </html>
