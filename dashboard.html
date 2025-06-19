@@ -213,8 +213,66 @@
         <li>@gearGranny</li>
         <li>@urbanTinker</li>
       </ul>
+      <div id="dynamicContainer" contenteditable="false"
+     style="
+       resize: both;
+       overflow: auto;
+       min-height: 200px;
+       min-width: 300px;
+       border: 2px dashed #ccc;
+       padding: 20px;
+       margin: 40px auto;
+       max-width: 90%;
+       background-color: #f9f9f9;
+       border-radius: 12px;
+       box-shadow: 0 0 10px rgba(0,0,0,0.05);
+     ">
+     <div id="chatContainer" style="
+  resize: both;
+  overflow: auto;
+  min-height: 300px;
+  min-width: 300px;
+  border: 2px solid #ccc;
+  padding: 20px;
+  margin: 40px auto;
+  max-width: 90%;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+">
+  <div id="chatMessages" style="height: 200px; overflow-y: auto; margin-bottom: 15px;"></div>
+  <input id="chatInput" type="text" placeholder="Type a message..." style="width: 70%; padding: 10px;" />
+  <button id="chatSend" style="padding: 10px;">Send</button>
+</div>
+
+<script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+<script>
+  const socket = io('https://your-backend-url.com'); // Replace with your deployed backend
+  const messagesDiv = document.getElementById('chatMessages');
+  const input = document.getElementById('chatInput');
+  const sendBtn = document.getElementById('chatSend');
+
+  socket.on('message', (msg) => {
+    const el = document.createElement('div');
+    el.textContent = msg;
+    messagesDiv.appendChild(el);
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+  });
+
+  sendBtn.addEventListener('click', () => {
+    const msg = input.value.trim();
+    if (msg) {
+      socket.emit('message', msg);
+      input.value = '';
+    }
+  });
+</script>
+
+</div>
+
     </aside>
   </main>
+  
   <script>
     const username = "@username";
     const postsDiv = document.getElementById("posts");
