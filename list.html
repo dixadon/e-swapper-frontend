@@ -1,46 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>List an Item - e-swapper</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>List an Item | e-swapper</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: #f2f2f2;
+    }
+
+    header {
+      background-color: #111;
+      color: white;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: 500;
+    }
+
+    main {
+      max-width: 800px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      font-weight: 600;
+      margin-top: 15px;
+    }
+
+    input[type="text"],
+    input[type="file"],
+    textarea,
+    select {
+      margin-top: 5px;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    button {
+      margin-top: 20px;
+      background-color: #222;
+      color: white;
+      border: none;
+      padding: 12px;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #333;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>List an Item</h1>
-    <nav>
-  <a href="index.html">Home</a>
-  <div class="dropdown">
-    <button class="dropbtn">Browse ▾</button>
-    <div class="dropdown-content">
-      <a href="./categories/all.html">All</a>
-      <a href="./categories/shoes.html">Shoes</a>
-      <a href="./categories/automobile.html">Automobile</a>
-      <a href="./categories/furniture.html">Furniture</a>
-      <a href="./categories/games_and_toys.html">Games & Toys</a>
-      <a href="./categories/jewelry.html">Jewelry</a>
-      <a href="./categories/books.html">Books</a>
-      <a href="./categories/phones.html">Phones</a>
-      <a href="./categories/other.html">Other</a>
-    </div>
-  </div>
-  
- 
-      <a href="list.html">List</a>
-      <a href="dashboard.html">Dashboard</a>
-      <a href="login.html">Login</a>
-      <a href="https://buy.stripe.com/8x2fZjgfTbYH4Xt3Lxawo00">Join Today!</a>
-    </nav>
 
+  <header>
+    <h1>e-swapper</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="browse.html">Browse</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="logout.html" id="logoutLink" style="display: none;">Logout</a>
+    </nav>
   </header>
 
   <main>
-    <form id="listForm" enctype="multipart/form-data">
-      <label>Title: <input type="text" name="title" required></label><br>
-      <label>Description: <textarea name="description" required></textarea></label><br>
-      <label>Category:
-        <select name="category" required>
-          <option value="">Select a category</option>
+    <h2>List an Item for Swap</h2>
+    <form id="listItemForm" enctype="multipart/form-data">
+      <label for="title">Item Title:</label>
+      <input type="text" id="title" name="title" required />
+
+      <label for="description">Description:</label>
+      <textarea id="description" name="description" required></textarea>
+
+      <label for="image">Upload Image:</label>
+      <input type="file" id="image" name="image" accept="image/*" required />
+
+      <label for="category">Item Category:</label>
+      <select id="category" name="category" required>
+        <option value="">Select a category</option>
+        <option value="Shoes">Shoes</option>
+        <option value="Automobile">Automobile</option>
+        <option value="Furniture">Furniture</option>
+        <option value="Games and Toys">Games and Toys</option>
+        <option value="Books">Books</option>
+        <option value="Phones">Phones</option>
+        <option value="Jewelry">Jewelry</option>
+        <option value="Computers">Computers</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <label for="preferenceType">Swap Preference:</label>
+      <select id="preferenceType" name="preferenceType" onchange="toggleItemDropdown()" required>
+        <option value="">Select preference</option>
+        <option value="specific">Change for specific item</option>
+        <option value="open">Open for suggestions</option>
+      </select>
+
+      <div id="specificItemContainer" style="display:none;">
+        <label for="preferredItem">Which item are you looking for?</label>
+        <select id="preferredItem" name="preferredItem">
+          <option value="All">All</option>
           <option value="Shoes">Shoes</option>
           <option value="Automobile">Automobile</option>
           <option value="Furniture">Furniture</option>
@@ -48,77 +139,26 @@
           <option value="Books">Books</option>
           <option value="Phones">Phones</option>
           <option value="Jewelry">Jewelry</option>
+          <option value="Computers">Computers</option>
           <option value="Other">Other</option>
-        </select>
-      </label><br>
-      <label>Image: <input type="file" name="image" accept="image/*" required></label><br>
-
-      <!-- Swap Preference -->
-      <label for="swapPreference">What do you want in exchange?</label>
-      <select id="swapPreference" name="swapPreference" onchange="handlePreferenceChange(this.value)" required>
-        <option value="">Select one</option>
-        <option value="specific">Change for specific item</option>
-        <option value="open">Open for suggestions</option>
-      </select><br>
-
-      <!-- Specific item dropdown -->
-      <div id="specificItemContainer" style="display:none; margin-top: 10px;">
-        <label for="desiredItem">Select desired item:</label>
-        <select id="desiredItem" name="desiredItem">
-          <option value="">Choose item...</option>
         </select>
       </div>
 
-      <button type="submit">Submit Listing</button>
+      <button type="submit">Submit Item</button>
     </form>
   </main>
 
   <script>
-    function handlePreferenceChange(value) {
-      const specificContainer = document.getElementById('specificItemContainer');
-      if (value === 'specific') {
-        specificContainer.style.display = 'block';
-        loadAvailableItems();
-      } else {
-        specificContainer.style.display = 'none';
-      }
+    function toggleItemDropdown() {
+      const type = document.getElementById('preferenceType').value;
+      document.getElementById('specificItemContainer').style.display = type === 'specific' ? 'block' : 'none';
     }
 
-    async function loadAvailableItems() {
-      try {
-        const res = await fetch('https://e-swapper-backend.onrender.com/api/items');
-        const items = await res.json();
-        const dropdown = document.getElementById('desiredItem');
-        dropdown.innerHTML = '<option value="">Choose item...</option>';
-        items.forEach(item => {
-          const option = document.createElement('option');
-          option.value = item._id;
-          option.textContent = item.title;
-          dropdown.appendChild(option);
-        });
-      } catch (err) {
-        console.error('Error loading items:', err);
-      }
+    // Show logout link only if logged in
+    if (localStorage.getItem('token')) {
+      document.getElementById('logoutLink').style.display = 'inline-block';
     }
-
-    document.getElementById('listForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const formData = new FormData(e.target);
-
-      const token = localStorage.getItem('token');
-      const res = await fetch('https://e-swapper-backend.onrender.com/api/items', {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${token}` },
-        body: formData
-      });
-
-      if (res.ok) {
-        alert('Item listed successfully!');
-        window.location.href = 'profile.html';
-      } else {
-        alert('Failed to list item.');
-      }
-    });
   </script>
+
 </body>
 </html>
