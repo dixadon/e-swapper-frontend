@@ -3,93 +3,70 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Signup - e-swapper</title>
-  <style>
-    body { font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px; }
-    h1 { color: #333; }
-    input { margin: 5px 0; padding: 10px; width: 200px; }
-    button { padding: 10px 20px; background-color: #222; color: #fff; border: none; }
-
-    .dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropbtn {
-  background: none;
-  border: none;
-  font: inherit;
-  color: #333;
-  cursor: pointer;
-  padding: 0;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #fff;
-  min-width: 160px;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: #333;
-  padding: 12px 16px;
-  display: block;
-  text-decoration: none;
-}
-
-.dropdown-content a:hover {
-  background-color: #f2f2f2;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-  </style>
+  <title>Sign Up - e-swapper</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <a href="index.html">← Back to Home</a>
-  <h1>Sign Up</h1><form method='POST' action='https://e-swapper-backend.onrender.com/api/users/register'><input type='text' name='username' placeholder='Username'><br><input type='password' name='password' placeholder='Password'><br><button type='submit'>Sign Up</button></form>
+  <header>
+    <h1>e-swapper</h1>
     <nav>
-  <a href="index.html">Home</a>
-  <div class="dropdown">
-    <button class="dropbtn">Browse ▾</button>
-    <div class="dropdown-content">
-      <a href="./categories/all.html">All</a>
-      <a href="./categories/shoes.html">Shoes</a>
-      <a href="./categories/automobile.html">Automobile</a>
-      <a href="./categories/furniture.html">Furniture</a>
-      <a href="./categories/games_and_toys.html">Games & Toys</a>
-      <a href="./categories/books.html">Books</a>
-      <a href="./categories/phones.html">Phones</a>
-      <a href="./categories/other.html">Other</a>
-    </div>
-  </div>
-  
- 
-      <a href="list.html">List</a>
-      <a href="dashboard.html">Dashboard</a>
+      <a href="index.html">Home</a>
       <a href="login.html">Login</a>
-      <a href="https://buy.stripe.com/8x2fZjgfTbYH4Xt3Lxawo00">Join Today!</a>
     </nav>
+  </header>
 
+  <main class="auth-container">
+    <h2>Create an Account</h2>
+    <form id="signupForm">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required />
 
-<script>
-  const token = localStorage.getItem("token");
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
 
-  if (token) {
-    // User is logged in
-    document.getElementById("logoutLink").style.display = "inline-block";
-    document.getElementById("loginLink").style.display = "none";
-  } else {
-    // Not logged in
-    document.getElementById("logoutLink").style.display = "none";
-    document.getElementById("loginLink").style.display = "inline-block";
-  }
-</script>
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" name="phone" placeholder="+1 234 567 8901" required />
 
+      <label for="address">Address:</label>
+      <input type="text" id="address" name="address" placeholder="City, State or Country" required />
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required />
+
+      <button type="submit">Sign Up</button>
+    </form>
+    <p>Already have an account? <a href="login.html">Login</a></p>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 e-swapper</p>
+  </footer>
+
+  <script>
+    document.getElementById('signupForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = {
+        username: e.target.username.value,
+        email: e.target.email.value,
+        phone: e.target.phone.value,
+        address: e.target.address.value,
+        password: e.target.password.value,
+      };
+
+      const res = await fetch('https://e-swapper-backend.onrender.com/api/users/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (res.ok) {
+        alert('Signup successful!');
+        window.location.href = 'login.html';
+      } else {
+        const err = await res.json();
+        alert('Signup failed: ' + (err.message || 'Unknown error'));
+      }
+    });
+  </script>
 </body>
 </html>
